@@ -1,8 +1,0 @@
-#include <stdio.h>
-
-int main(int argc, char *argv[])
-{
-    man 3 puts("Hello world.");
-
-    return 0;
-}
