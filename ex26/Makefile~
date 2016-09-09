@@ -1,0 +1,24 @@
+PREFIX?=/usr/local
+CFLAGS=-g -Wall -I${PREFIX}/apr/include/apr-1  -I${PREFIX}/apr/include/apr-util-1
+LDFLAGS=-L${PREFIX}/apr/lib -lapr-1 -pthread -laprutil-1
+CC=gcc
+OBJECTS= bstrlib.o db.o shell.o commands.o
+DEVPKG=devpkg.c 
+CMD=commands.c
+DB=db.c
+BSTRLIB=bstrlib.c
+SHELL=shell.c
+
+all: devpkg
+
+devpkg: $(PRGMS)
+	$(CC) $(CFLAGS) $(OBJECTS) -o PRGM.out
+
+install: all
+	install -d $(DESTDIR)/$(PREFIX)/bin/
+	install devpkg $(DESTDIR)/$(PREFIX)/bin/
+
+clean:
+	rm -f *.o
+	rm -f devpkg
+	rm -rf *.dSYM
